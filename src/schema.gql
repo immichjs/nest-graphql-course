@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Author {
+  id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type SearchAuthorsResult {
+  items: [Author!]!
+  currentPage: Int!
+  perPage: Int!
+  lastPage: Int!
+  total: Int!
+}
+
+type Post {
+  id: String!
+  title: String!
+  slug: String!
+  content: String!
+  author: Author!
+  published: Boolean!
+  createdAt: DateTime!
+}
+
+type Query {
+  helloWorld: String!
+  listAuthors(page: Int, perPage: Int, sort: String, sortDir: String, filter: String): SearchAuthorsResult!
+  getAuthorById(id: String!): Author!
+  getPostById(id: String!): Post!
+}
+
+type Mutation {
+  createAuthor(data: CreateAuthorInput!): Author!
+  updateAuthor(id: String!, data: UpdateAuthorInput!): Author!
+  deleteAuthor(id: String!): Author!
+  createPost(data: CreatePostInput!): Post!
+  publishPost(id: String!): Post!
+  unpublishPost(id: String!): Post!
+}
+
+input CreateAuthorInput {
+  name: String!
+  email: String!
+}
+
+input UpdateAuthorInput {
+  name: String
+  email: String
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+  authorId: String!
+}
